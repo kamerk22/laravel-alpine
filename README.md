@@ -6,6 +6,8 @@ Laravel PHP framework running on PHP-FPM with alpine base Docker Image 🐳
 [![Docker Pulls](https://img.shields.io/docker/pulls/kamerk22/laravel-alpine.svg?style=flat-square)](https://hub.docker.com/r/kamerk22/laravel-alpine)
 [![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square)](https://github.com/kamerk22/laravel-alpine/)
 
+![SIZE](http://i.imgur.com/oJ4jCPP.jpg)
+
 ## Pull it from Docker Registry
 To pull the docker image:
 ```bash
