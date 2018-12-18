@@ -50,6 +50,9 @@ RUN curl -s https://getcomposer.org/installer | php -- --install-dir=/usr/local/
 ENV COMPOSER_ALLOW_SUPERUSER=1
 ENV PATH="./vendor/bin:$PATH"
 
+COPY opcache.ini $PHP_INI_DIR/conf.d/
+COPY php.ini $PHP_INI_DIR/conf.d/
+
 # Setup Crond and Supervisor by default
 RUN echo '*  *  *  *  * /usr/local/bin/php  /var/www/artisan schedule:run >> /dev/null 2>&1' > /etc/crontabs/root && mkdir /etc/supervisor.d 
 ADD master.ini /etc/supervisor.d/
