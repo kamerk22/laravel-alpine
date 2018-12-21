@@ -1,4 +1,4 @@
-FROM php:7.1-fpm-alpine
+FROM php:7.1-fpm-alpine3.8
 
 LABEL Maintainer Kashyap Merai <kashyapk62@gmail.com>
 
@@ -46,7 +46,7 @@ RUN docker-php-ext-configure \
     bcmath
 
 # Add Composer
-RUN curl -s https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin/ --filename=composer
+RUN curl -s https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin/ --filename=composer 
 ENV COMPOSER_ALLOW_SUPERUSER=1
 ENV PATH="./vendor/bin:$PATH"
 
