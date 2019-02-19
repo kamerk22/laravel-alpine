@@ -24,15 +24,8 @@ docker run -v $(pwd):/var/www kamerk22/laravel-alpine:latest "composer install -
  - [Composer](https://getcomposer.org/) ( with non Root user )
  - CRON ( pre-installed and configured to work with Laravel Scheduler )
  - [Supervisor](http://supervisord.org) 
- 
-## Docker hub tags
-You can use following tags on Docker hub:
-- `latest` - Default
-- `mysql` - MySQL driver 
-- `pgsql` - PostgreSQL driver
 
 ## Other Details
-- PHP - 7.2
 - Alpine - 3.8
 
 ## PHP Extension
