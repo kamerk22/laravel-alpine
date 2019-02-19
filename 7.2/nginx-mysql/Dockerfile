@@ -1,4 +1,4 @@
-FROM php:7.1-fpm-alpine3.8
+FROM php:7.2-fpm-alpine3.8
 
 LABEL Maintainer Kashyap Merai <kashyapk62@gmail.com>
 
@@ -13,9 +13,7 @@ RUN apk add --no-cache --virtual .build-deps  \
     libjpeg-turbo-dev \
     libpng-dev \
     libxml2-dev \
-    bzip2-dev \
-    postgresql-dev
-
+    bzip2-dev
 
 # Add Production Dependencies
 RUN apk add --update --no-cache \
@@ -25,7 +23,8 @@ RUN apk add --update --no-cache \
     supervisor \
     nano \
     icu-dev \
-    freetype-dev 
+    freetype-dev \
+    nginx
 
 # Configure & Install Extension
 RUN docker-php-ext-configure \
@@ -33,9 +32,9 @@ RUN docker-php-ext-configure \
     docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ &&\
     docker-php-ext-install \ 
     opcache \ 
-    pdo_pgsql \
-    pgsql \
+    mysqli \ 
     pdo \ 
+    pdo_mysql \ 
     sockets \ 
     json \
     intl \
@@ -47,7 +46,7 @@ RUN docker-php-ext-configure \
     bcmath
 
 # Add Composer
-RUN curl -s https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin/ --filename=composer
+RUN curl -s https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin/ --filename=composer 
 ENV COMPOSER_ALLOW_SUPERUSER=1
 ENV PATH="./vendor/bin:$PATH"
 
@@ -57,10 +56,10 @@ COPY php.ini $PHP_INI_DIR/conf.d/
 # Setup Crond and Supervisor by default
 RUN echo '*  *  *  *  * /usr/local/bin/php  /var/www/artisan schedule:run >> /dev/null 2>&1' > /etc/crontabs/root && mkdir /etc/supervisor.d 
 ADD master.ini /etc/supervisor.d/
+ADD default.conf /etc/nginx/conf.d/ 
 
 # Remove Build Dependencies
-RUN apk del -f .build-deps 
-
+RUN apk del -f .build-deps
 # Setup Working Dir
 WORKDIR /var/www
 
