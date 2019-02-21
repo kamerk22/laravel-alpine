@@ -13,7 +13,8 @@ RUN apk add --no-cache --virtual .build-deps  \
     libjpeg-turbo-dev \
     libpng-dev \
     libxml2-dev \
-    bzip2-dev
+    bzip2-dev \
+    postgresql-dev
 
 # Add Production Dependencies
 RUN apk add --update --no-cache \
