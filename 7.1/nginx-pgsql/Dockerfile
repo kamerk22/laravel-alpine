@@ -13,7 +13,8 @@ RUN apk add --no-cache --virtual .build-deps  \
     libjpeg-turbo-dev \
     libpng-dev \
     libxml2-dev \
-    bzip2-dev
+    bzip2-dev \
+    postgresql-dev
 
 # Add Production Dependencies
 RUN apk add --update --no-cache \
@@ -30,11 +31,12 @@ RUN apk add --update --no-cache \
 # Configure & Install Extension
 RUN docker-php-ext-configure \
     opcache --enable-opcache &&\
-    docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ &&\
+    docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ &&\ 
+    docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql &&\
     docker-php-ext-install \ 
     opcache \ 
     pdo_pgsql \
-    pgsql -with-pgsql=/usr/local/pgsql \
+    pgsql \
     pdo \ 
     sockets \ 
     json \
