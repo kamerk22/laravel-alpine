@@ -34,7 +34,7 @@ RUN docker-php-ext-configure \
     docker-php-ext-install \ 
     opcache \ 
     pdo_pgsql \
-    pgsql \
+    pgsql -with-pgsql=/usr/local/pgsql \
     pdo \ 
     sockets \ 
     json \
