@@ -8,7 +8,7 @@ RUN rm -f /etc/apk/repositories &&\
     echo "http://dl-cdn.alpinelinux.org/alpine/v3.8/community" >> /etc/apk/repositories
 
 # Add Build Dependencies
-RUN apk add --no-cache --virtual .build-deps  \
+RUN apk update && apk add --no-cache --virtual .build-deps  \
     zlib-dev \
     libjpeg-turbo-dev \
     libpng-dev \
@@ -25,7 +25,8 @@ RUN apk add --update --no-cache \
     icu-dev \
     freetype-dev \
     nginx \
-    mysql-client
+    mysql-client \
+    libzip-dev
 
 # Configure & Install Extension
 RUN docker-php-ext-configure \
