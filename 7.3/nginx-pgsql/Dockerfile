@@ -8,13 +8,14 @@ RUN rm -f /etc/apk/repositories &&\
     echo "http://dl-cdn.alpinelinux.org/alpine/v3.8/community" >> /etc/apk/repositories
 
 # Add Build Dependencies
-RUN apk add --no-cache --virtual .build-deps  \
+RUN apk update && apk add --no-cache --virtual .build-deps  \
     zlib-dev \
     libjpeg-turbo-dev \
     libpng-dev \
     libxml2-dev \
     bzip2-dev \
-    postgresql-dev
+    postgresql-dev \
+    libzip-dev
 
 # Add Production Dependencies
 RUN apk add --update --no-cache \
@@ -31,13 +32,14 @@ RUN apk add --update --no-cache \
 # Configure & Install Extension
 RUN docker-php-ext-configure \
     opcache --enable-opcache &&\
-    docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ &&\
-    docker-php-ext-install \
-    opcache \
+    docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ &&\ 
+    docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql &&\
+    docker-php-ext-install \ 
+    opcache \ 
     pdo_pgsql \
-    pgsql -with-pgsql=/usr/local/pgsql \
-    pdo \
-    sockets \
+    pgsql \
+    pdo \ 
+    sockets \ 
     json \
     intl \
     gd \
@@ -45,7 +47,8 @@ RUN docker-php-ext-configure \
     zip \
     bz2 \
     pcntl \
-    bcmath
+    bcmath \
+    exif
 
 # Add Composer
 RUN curl -s https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin/ --filename=composer
