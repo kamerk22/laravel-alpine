@@ -1,4 +1,4 @@
-FROM php:fpm-alpine3.12
+FROM php:7.4-fpm-alpine3.12
 
 LABEL Maintainer Kashyap Merai <kashyapk62@gmail.com>
 
