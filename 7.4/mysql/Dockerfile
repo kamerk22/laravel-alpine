@@ -8,12 +8,14 @@ RUN rm -f /etc/apk/repositories &&\
     echo "http://dl-cdn.alpinelinux.org/alpine/v3.12/community" >> /etc/apk/repositories
 
 # Add Build Dependencies
-RUN apk add --no-cache --virtual .build-deps  \
+RUN apk update && apk add --no-cache --virtual .build-deps  \
     zlib-dev \
     libjpeg-turbo-dev \
     libpng-dev \
     libxml2-dev \
-    bzip2-dev
+    bzip2-dev \
+    zip \
+    libzip-dev
 
 # Add Production Dependencies
 RUN apk add --update --no-cache \
