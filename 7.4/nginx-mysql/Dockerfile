@@ -33,7 +33,6 @@ RUN apk add --update --no-cache \
 RUN docker-php-ext-configure \
     opcache --enable-opcache &&\
     docker-php-ext-configure gd --with-jpeg=/usr/include/ --with-freetype=/usr/include/ && \
-    docker-php-ext-configure zip && \
     docker-php-ext-install \
     opcache \
     mysqli \
@@ -46,7 +45,8 @@ RUN docker-php-ext-configure \
     xml \
     bz2 \
     pcntl \
-    bcmath
+    bcmath \
+    zip
 
 # Add Composer
 RUN curl -s https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin/ --filename=composer
