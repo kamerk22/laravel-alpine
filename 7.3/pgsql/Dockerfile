@@ -26,7 +26,8 @@ RUN apk add --update --no-cache \
     nano \
     icu-dev \
     freetype-dev \
-    mysql-client
+    mysql-client \ 
+    libzip-dev
 
 # Configure & Install Extension
 RUN docker-php-ext-configure \
