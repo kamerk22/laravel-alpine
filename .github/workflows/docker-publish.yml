@@ -35,6 +35,6 @@ jobs:
         with:
           context: ./7.4/nginx-mysql/
           push: ${{ github.event_name != 'pull_request' }}
-          tags: 7.4-mysql-nginx
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:7.4-mysql-nginx
           labels: ${{ steps.meta.outputs.labels }}
           
