@@ -1,4 +1,4 @@
-name: Docker
+name: Build PHP7.3
 
 on:
   push:
