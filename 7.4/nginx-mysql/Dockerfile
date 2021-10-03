@@ -14,8 +14,7 @@ RUN apk update && apk add --no-cache --virtual .build-deps  \
     libpng-dev \
     libxml2-dev \
     bzip2-dev \
-    zip \
-    libzip-dev
+    zip 
 
 # Add Production Dependencies
 RUN apk add --update --no-cache \
@@ -27,7 +26,8 @@ RUN apk add --update --no-cache \
     icu-dev \
     freetype-dev \
     nginx \
-    mysql-client
+    mysql-client \
+    libzip-dev
 
 # Configure & Install Extension
 RUN docker-php-ext-configure \
