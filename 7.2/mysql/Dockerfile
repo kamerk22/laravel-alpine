@@ -1,11 +1,11 @@
-FROM php:7.2-fpm-alpine3.8
+FROM php:7.2-fpm-alpine3.12
 
 LABEL Maintainer Kashyap Merai <kashyapk62@gmail.com>
 
 # Add Repositories
-RUN rm -f /etc/apk/repositories &&\ 
-    echo "http://dl-cdn.alpinelinux.org/alpine/v3.8/main" >> /etc/apk/repositories && \
-    echo "http://dl-cdn.alpinelinux.org/alpine/v3.8/community" >> /etc/apk/repositories
+RUN rm -f /etc/apk/repositories &&\
+    echo "http://dl-cdn.alpinelinux.org/alpine/v3.12/main" >> /etc/apk/repositories && \
+    echo "http://dl-cdn.alpinelinux.org/alpine/v3.12/community" >> /etc/apk/repositories
 
 # Add Build Dependencies
 RUN apk update && apk add --no-cache --virtual .build-deps  \
