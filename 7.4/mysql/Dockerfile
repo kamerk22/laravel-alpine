@@ -1,19 +1,20 @@
-FROM php:7.4-fpm-alpine3.12
+FROM php:7.4-fpm-alpine3.14
 
 LABEL Maintainer Kashyap Merai <kashyapk62@gmail.com>
 
 # Add Repositories
 RUN rm -f /etc/apk/repositories &&\
-    echo "http://dl-cdn.alpinelinux.org/alpine/v3.12/main" >> /etc/apk/repositories && \
-    echo "http://dl-cdn.alpinelinux.org/alpine/v3.12/community" >> /etc/apk/repositories
+    echo "http://dl-cdn.alpinelinux.org/alpine/v3.14/main" >> /etc/apk/repositories && \
+    echo "http://dl-cdn.alpinelinux.org/alpine/v3.14/community" >> /etc/apk/repositories
 
 # Add Build Dependencies
-RUN apk add --no-cache --virtual .build-deps  \
+RUN apk update && apk add --no-cache --virtual .build-deps  \
     zlib-dev \
     libjpeg-turbo-dev \
     libpng-dev \
     libxml2-dev \
-    bzip2-dev
+    bzip2-dev \
+    zip 
 
 # Add Production Dependencies
 RUN apk add --update --no-cache \
@@ -24,7 +25,8 @@ RUN apk add --update --no-cache \
     nano \
     icu-dev \
     freetype-dev \
-    mysql-client
+    mysql-client \ 
+    libzip-dev
 
 # Configure & Install Extension
 RUN docker-php-ext-configure \
@@ -47,7 +49,6 @@ RUN docker-php-ext-configure \
 
 # Add Composer
 RUN curl -s https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin/ --filename=composer
-RUN composer global require hirak/prestissimo
 ENV COMPOSER_ALLOW_SUPERUSER=1
 ENV PATH="./vendor/bin:$PATH"
 

@@ -21,12 +21,12 @@ docker run -v $(pwd):/var/www kamerk22/laravel-alpine:latest "composer install -
 ```
 
 ## What's Included
- - [Composer](https://getcomposer.org/) ( with non Root user )
+ - [Composer](https://getcomposer.org/) ( v2 - updated )
  - CRON ( pre-installed and configured to work with Laravel Scheduler )
  - [Supervisor](http://supervisord.org) 
 
 ## Other Details
-- Alpine - 3.8
+- Alpine base image
 
 ## PHP Extension
 - opcache
