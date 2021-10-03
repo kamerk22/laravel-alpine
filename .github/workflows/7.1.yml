@@ -1,13 +1,10 @@
 name: Build PHP7.1
-
 on:
   push:
     branches: [master]
-
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
-
 jobs:
   mysql-nginx-7_1:
     runs-on: ubuntu-latest
