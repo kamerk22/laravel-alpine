@@ -1,5 +1,5 @@
 # Stage 1: Build environment and Composer dependencies
-FROM php:8.4-fpm-alpine3.22
+FROM php:8.4-fpm-alpine
 
 # Install system dependencies and PHP extensions required for Laravel + MySQL support
 # Some dependencies are required for PHP extensions only in the build stage
